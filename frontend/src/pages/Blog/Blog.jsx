@@ -51,17 +51,18 @@ function Blog() {
                   <img src={post.img} alt={post.title} />
                 </div>
                 <div className="blog-card-body">
-                  <span className="blog-card-category">post.category</span>
-                  <h3 className="blog-card-title">post.title</h3>
-                  <p className="blog-card-excerpt">post.excerpt</p>
+                  <span className="blog-card-category">{post.category}</span>
+                  <h3 className="blog-card-title">{post.title}</h3>
+                  <p className="blog-card-excerpt">{post.excerpt}</p>
                   <div className="blog-card-meta">
-                    <span>post.date</span>
+                    <span>{post.date}</span>
                     <span className="blog-card-dot"></span>
-                    <span>post.readTime</span>
+                    <span>{post.readTime}</span>
                   </div>
                 </div>
               </article>
-            )          </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

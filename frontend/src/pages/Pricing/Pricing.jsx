@@ -138,6 +138,7 @@ function Pricing() {
                       <span className="pricing-amount">{plan.price}</span>
                       {plan.period && <span className="pricing-period">{plan.period}</span>}
                     </>
+                  )}
                 </div>
 
                 {plan.yearlySaving && yearly && (
