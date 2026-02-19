@@ -1,0 +1,121 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-body);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.splash.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-logo-wrapper {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.splash-ring {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  border-top-color: var(--primary);
+  animation: splash-spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.splash-ring-outer {
+  inset: -28px;
+  border-top-color: transparent;
+  border-right-color: var(--primary);
+  opacity: 0.3;
+  animation: splash-spin-reverse 1.5s linear infinite;
+}
+
+.splash-logo-box {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-xl);
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(60, 56, 230, 0.3), 0 0 80px rgba(60, 56, 230, 0.1);
+  animation: splash-breathe 2s ease-in-out infinite;
+}
+
+.splash-logo-box .material-icons {
+  font-size: 2rem;
+  color: var(--text-inverse);
+}
+
+.splash-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  animation: splash-fade-up 0.6s ease-out 0.2s both;
+}
+
+.splash-brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+}
+
+.splash-brand-accent {
+  color: var(--primary);
+}
+
+.splash-bar-track {
+  width: 120px;
+  height: 3px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: 1.5rem;
+  animation: splash-fade-up 0.6s ease-out 0.4s both;
+}
+
+.splash-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--emerald));
+  border-radius: var(--radius-full);
+  animation: splash-fill 1.4s ease-in-out 0.3s forwards;
+}
+
+@keyframes splash-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes splash-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes splash-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes splash-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-fill {
+  0% { width: 0%; }
+  60% { width: 80%; }
+  100% { width: 100%; }
+}
