@@ -50,16 +50,14 @@
 }
 
 .pricing-desc {
-  font-size: 1.125rem;
   color: var(--text-muted);
+  font-size: 1.125rem;
   margin-bottom: 2rem;
 }
 
-/* Toggle */
 .pricing-toggle-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.75rem;
 }
 
@@ -68,9 +66,6 @@
   font-weight: 500;
   color: var(--text-muted);
   transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .pricing-toggle-label.active {
@@ -78,55 +73,45 @@
   font-weight: 600;
 }
 
-.pricing-toggle-save {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  background: rgba(52, 211, 153, 0.15);
-  color: #059669;
-  padding: 0.125rem 0.5rem;
-  border-radius: var(--radius-full);
-}
-
-[data-theme="dark"] .pricing-toggle-save {
-  background: rgba(52, 211, 153, 0.2);
-  color: #34d399;
-}
-
 .pricing-toggle {
-  position: relative;
   width: 3rem;
-  height: 1.625rem;
-  background: var(--border);
+  height: 1.75rem;
   border-radius: var(--radius-full);
+  background: var(--border);
+  position: relative;
   cursor: pointer;
-  transition: background 0.3s;
-  flex-shrink: 0;
+  transition: background 0.2s;
 }
 
-.pricing-toggle.yearly {
-  background: var(--primary);
+.pricing-toggle:hover {
+  background: var(--text-muted);
+}
+
+.pricing-toggle.yearly .pricing-toggle-knob {
+  transform: translateX(1.25rem);
 }
 
 .pricing-toggle-knob {
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 0.25rem;
+  left: 0.25rem;
   width: 1.25rem;
   height: 1.25rem;
-  background: white;
   border-radius: 50%;
-  transition: transform 0.3s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background: white;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
 }
 
-.pricing-toggle.yearly .pricing-toggle-knob {
-  transform: translateX(1.375rem);
+.pricing-toggle-save {
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--green);
+  font-weight: 600;
 }
 
-/* Cards Section */
 .pricing-cards-section {
-  padding: 2rem 0 4rem;
+  padding: 0 0 4rem;
 }
 
 .pricing-cards-container {
@@ -142,6 +127,10 @@
 
 @media (min-width: 1024px) { .pricing-cards { grid-template-columns: repeat(3, 1fr); } }
 
+.pricing-card-wrapper {
+  position: relative;
+}
+
 .pricing-card {
   position: relative;
   background: var(--bg-surface);
@@ -151,11 +140,51 @@
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
+  z-index: 2;
 }
 
 .pricing-card:hover {
   box-shadow: var(--shadow-xl);
   transform: translateY(-4px);
+}
+
+/* Gizli Kedi - Kartın arkasında, hover'da görünür */
+.pricing-card-cat {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.pricing-card-cat .cat-head {
+  font-size: 2.5rem;
+  transform: translateY(50px);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  display: block;
+  text-align: center;
+}
+
+.pricing-card-wrapper:hover .pricing-card-cat {
+  opacity: 1;
+  top: -35px;
+}
+
+.pricing-card-wrapper:hover .pricing-card-cat .cat-head {
+  transform: translateY(0);
+  animation: cat-look 0.6s ease-in-out;
+}
+
+@keyframes cat-look {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 /* Featured: Pro */
@@ -175,35 +204,27 @@
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.15);
 }
 
-.pricing-card-deluxe:hover {
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-}
-
-/* Badges on card */
 .pricing-popular-badge {
   position: absolute;
   top: -0.75rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary);
-  color: white;
   padding: 0.25rem 1rem;
   border-radius: var(--radius-full);
+  background: var(--primary);
+  color: white;
   font-size: 0.75rem;
   font-weight: 700;
-  white-space: nowrap;
+  z-index: 3;
 }
 
 .pricing-deluxe-badge {
-  background: linear-gradient(135deg, #d4af37, #f0d060);
-  color: #3a2900;
+  background: var(--gold);
+  color: #1a1a2e;
 }
 
-/* Card Header with badge icon */
 .pricing-card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  position: relative;
   margin-bottom: 1rem;
 }
 
@@ -214,21 +235,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-
-.pricing-badge-icon .material-icons {
-  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .pricing-badge-pro {
-  background: linear-gradient(135deg, #3c38e6, #6366f1);
+  background: linear-gradient(135deg, var(--primary), #6366f1);
   color: white;
 }
 
 .pricing-badge-deluxe {
-  background: linear-gradient(135deg, #d4af37, #f0d060);
-  color: #3a2900;
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #1a1a2e;
 }
 
 .pricing-card-name {
@@ -237,56 +254,55 @@
 }
 
 .pricing-card-price {
-  margin-bottom: 0.5rem;
   display: flex;
   align-items: baseline;
   gap: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .pricing-amount {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  color: var(--text-heading);
 }
 
 .pricing-period {
   font-size: 1rem;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 .pricing-saving {
-  display: inline-block;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
+  color: var(--green);
   font-weight: 600;
-  color: #059669;
-  background: rgba(52, 211, 153, 0.1);
-  padding: 0.125rem 0.625rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 0.75rem;
-}
-
-[data-theme="dark"] .pricing-saving {
-  color: #34d399;
-  background: rgba(52, 211, 153, 0.15);
+  margin-bottom: 1rem;
 }
 
 .pricing-card-desc {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
-/* Commission box */
 .pricing-commission {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-lg);
-  font-size: 0.8125rem;
-  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
   margin-bottom: 1.5rem;
+}
+
+.pricing-commission-warn {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--amber);
+}
+
+.pricing-commission-ok {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--green);
 }
 
 .pricing-commission-icon {
@@ -294,111 +310,81 @@
   flex-shrink: 0;
 }
 
-.pricing-commission-warn {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fde68a;
-}
-
-[data-theme="dark"] .pricing-commission-warn {
-  background: rgba(251, 191, 36, 0.1);
-  color: #fbbf24;
-  border-color: rgba(251, 191, 36, 0.2);
-}
-
-.pricing-commission-ok {
-  background: rgba(52, 211, 153, 0.1);
-  color: #059669;
-  border: 1px solid rgba(52, 211, 153, 0.2);
-}
-
-[data-theme="dark"] .pricing-commission-ok {
-  color: #34d399;
-  border-color: rgba(52, 211, 153, 0.15);
-}
-
-/* Features */
 .pricing-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-  flex-grow: 1;
+  list-style: none;
+  margin-bottom: 1.5rem;
+  flex: 1;
 }
 
 .pricing-features li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
+  padding: 0.35rem 0;
   color: var(--text-body);
-  line-height: 1.4;
 }
 
 .pricing-check {
-  font-size: 1.125rem;
-  color: var(--primary);
+  font-size: 1.25rem;
+  color: var(--green);
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
-.pricing-card-deluxe .pricing-check {
-  color: var(--gold);
-}
-
-/* CTA Buttons */
 .pricing-cta {
-  display: block;
-  text-align: center;
-  padding: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
   border-radius: var(--radius-lg);
-  font-weight: 700;
-  font-size: 0.9375rem;
+  font-weight: 600;
+  font-size: 1rem;
   transition: all 0.2s;
-  margin-top: auto;
+  text-decoration: none;
+}
+
+.pricing-cta-outline {
+  border: 2px solid var(--border);
+  color: var(--text-heading);
+  background: transparent;
+}
+
+.pricing-cta-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
 }
 
 .pricing-cta-primary {
   background: var(--primary);
   color: white;
+  border: 2px solid var(--primary);
   box-shadow: var(--shadow-primary);
 }
 
 .pricing-cta-primary:hover {
   background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
 }
 
 .pricing-cta-deluxe {
-  background: linear-gradient(135deg, #d4af37, #f0d060);
-  color: #3a2900;
-  font-weight: 800;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #1a1a2e;
+  border: 2px solid var(--gold);
 }
 
 .pricing-cta-deluxe:hover {
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-  transform: translateY(-1px);
+  filter: brightness(1.1);
+  transform: translateY(-2px);
 }
 
-.pricing-cta-outline {
-  background: var(--bg-surface);
-  color: var(--primary);
-  border: 1px solid var(--border);
-}
-
-.pricing-cta-outline:hover {
-  border-color: var(--primary);
-  background: var(--primary-light);
-}
-
-/* Pricing FAQ Section */
 .pricing-faq-section {
-  padding: 4rem 0 6rem;
-  border-top: 1px solid var(--border);
+  padding: 0 0 6rem;
 }
 
 .pricing-faq-container {
-  max-width: 1280px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -407,15 +393,13 @@
   font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .pricing-faq-grid {
   display: grid;
   gap: 1.5rem;
 }
-
-@media (min-width: 768px) { .pricing-faq-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .pricing-faq-item {
   background: var(--bg-surface);
@@ -427,12 +411,11 @@
 .pricing-faq-item h4 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-heading);
+  margin-bottom: 0.75rem;
 }
 
 .pricing-faq-item p {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
   line-height: 1.6;
 }

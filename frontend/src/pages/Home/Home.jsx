@@ -3,7 +3,7 @@ import './Home.css';
 
 function Home() {
   return (
-    <div className="home">
+    <div className="home home-entry">
       <section className="hero">
         <div className="hero-bg-gradient"></div>
         <div className="hero-bg-blob hero-bg-blob-right"></div>

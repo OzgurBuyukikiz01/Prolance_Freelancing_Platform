@@ -7,65 +7,49 @@ function Pricing() {
 
   const plans = [
     {
-      tier: 'starter',
       name: 'Starter',
-      price: 'Free',
+      tier: 'starter',
+      price: 'Ücretsiz',
       period: '',
-      yearlyPrice: null,
-      description: 'Tüm temel özelliklere erişin. Herhangi bir abonelik ücreti yok — sadece işlem başına komisyon.',
-      commission: '%2 + ₺20 işlem komisyonu',
-      features: [
-        'Usta arama ve ilan oluşturma',
-        'Uygulama içi teklif ve pazarlık',
-        'Güvenli escrow ödeme koruması',
-        'Fotoğraf & video iş doğrulama',
-        'Randevu ve saat seçimi',
-        'Topluluk desteği',
-      ],
-      cta: 'Ücretsiz Başla',
-      featured: false,
+      yearlyPrice: 'Ücretsiz',
+      yearlyPeriod: '',
+      yearlySaving: null,
+      description: 'Hemen başlayın. İşlem başına komisyon ödeyin.',
+      commission: 'İşlem başına %2 + ₺20 komisyon',
       badge: null,
+      featured: false,
+      features: ['Sınırsız ilan ve arama', 'Güvenli escrow ödemeleri', 'Uygulama içi teklif sistemi', 'Fotoğraf ve video doğrulama'],
+      cta: 'Ücretsiz Başla',
     },
     {
-      tier: 'pro',
       name: 'Pro',
+      tier: 'pro',
       price: '₺99',
       period: '/ay',
       yearlyPrice: '₺999',
       yearlyPeriod: '/yıl',
-      yearlySaving: '₺189 tasarruf',
-      description: 'Komisyon yok, öne çıkarma bonusu ve Pro rozeti ile fark yaratın.',
-      commission: 'Komisyon yok — sadece ödeme aracı kesintisi',
-      features: [
-        'Starter\'daki tüm özellikler',
-        'İşlem komisyonu yok (%2 + ₺20 kalkar)',
-        'Haftalık 1 adet 24 saatlik ilan öne çıkarma',
-        'Profilde Pro rozeti (mavi-beyaz ikon)',
-      ],
-      cta: 'Pro\'ya Geç',
-      featured: true,
+      yearlySaving: '2 ay ücretsiz',
+      description: 'Komisyonsuz işlemler ve haftalık öne çıkarma.',
+      commission: 'Komisyon yok',
       badge: 'pro',
+      featured: true,
+      features: ['Starter\'daki her şey', 'Komisyonsuz işlemler', 'Haftada 1 öne çıkarma', 'Pro profil rozeti'],
+      cta: 'Pro\'ya Geç',
     },
     {
-      tier: 'deluxe',
       name: 'Deluxe',
+      tier: 'deluxe',
       price: '₺199',
       period: '/ay',
       yearlyPrice: '₺1.899',
       yearlyPeriod: '/yıl',
-      yearlySaving: '₺489 tasarruf',
-      description: 'Maksimum ayrıcalık: daha fazla öne çıkarma, indirim kuponları ve VIP destek.',
-      commission: 'Komisyon yok — sadece ödeme aracı kesintisi',
-      features: [
-        'Pro\'daki tüm özellikler',
-        'Haftalık 3 adet 24 saatlik ilan öne çıkarma',
-        'Her 5 alışverişte ₺200 indirim kuponu',
-        'Canlı destek sıra önceliği',
-        'Profilde Deluxe rozeti (altın ikon)',
-      ],
-      cta: 'Deluxe\'a Geç',
-      featured: false,
+      yearlySaving: '2 ay ücretsiz',
+      description: 'En fazla avantaj, indirim kuponları ve öncelikli destek.',
+      commission: 'Komisyon yok',
       badge: 'deluxe',
+      featured: false,
+      features: ['Pro\'daki her şey', 'Haftada 3 öne çıkarma', 'Her 5 alışverişte ₺200 kupon', 'Öncelikli canlı destek', 'Deluxe profil rozeti'],
+      cta: 'Deluxe\'a Geç',
     },
   ];
 
@@ -108,71 +92,78 @@ function Pricing() {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`pricing-card ${plan.featured ? 'pricing-card-featured' : ''} ${plan.tier === 'deluxe' ? 'pricing-card-deluxe' : ''}`}
+                className={`pricing-card-wrapper ${plan.featured ? 'pricing-card-featured' : ''} ${plan.tier === 'deluxe' ? 'pricing-card-deluxe' : ''}`}
               >
-                {plan.featured && <div className="pricing-popular-badge">En Popüler</div>}
-                {plan.tier === 'deluxe' && <div className="pricing-popular-badge pricing-deluxe-badge">Premium</div>}
-
-                <div className="pricing-card-header">
-                  {plan.badge === 'pro' && (
-                    <div className="pricing-badge-icon pricing-badge-pro">
-                      <span className="material-icons">verified</span>
-                    </div>
-                  )}
-                  {plan.badge === 'deluxe' && (
-                    <div className="pricing-badge-icon pricing-badge-deluxe">
-                      <span className="material-icons">workspace_premium</span>
-                    </div>
-                  )}
-                  <h3 className="pricing-card-name">{plan.name}</h3>
+                <div className="pricing-card-cat">
+                  <div className="cat-head">🐱</div>
                 </div>
-
-                <div className="pricing-card-price">
-                  {plan.yearlyPrice && yearly ? (
-                    <>
-                      <span className="pricing-amount">{plan.yearlyPrice}</span>
-                      <span className="pricing-period">{plan.yearlyPeriod}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="pricing-amount">{plan.price}</span>
-                      {plan.period && <span className="pricing-period">{plan.period}</span>}
-                    </>
-                  )}
-                </div>
-
-                {plan.yearlySaving && yearly && (
-                  <div className="pricing-saving">{plan.yearlySaving}</div>
-                )}
-
-                <p className="pricing-card-desc">{plan.description}</p>
-
-                <div className={`pricing-commission ${plan.tier === 'starter' ? 'pricing-commission-warn' : 'pricing-commission-ok'}`}>
-                  <span className="material-icons pricing-commission-icon">
-                    {plan.tier === 'starter' ? 'info' : 'check_circle'}
-                  </span>
-                  {plan.commission}
-                </div>
-
-                <ul className="pricing-features">
-                  {plan.features.map((feat) => (
-                    <li key={feat}>
-                      <span className="material-icons pricing-check">check</span>
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  to="/contact"
-                  className={`pricing-cta ${
-                    plan.featured ? 'pricing-cta-primary' :
-                    plan.tier === 'deluxe' ? 'pricing-cta-deluxe' :
-                    'pricing-cta-outline'
-                  }`}
+                <div
+                  className={`pricing-card ${plan.featured ? 'pricing-card-featured' : ''} ${plan.tier === 'deluxe' ? 'pricing-card-deluxe' : ''}`}
                 >
-                  {plan.cta}
-                </Link>
+                  {plan.featured && <div className="pricing-popular-badge">En Popüler</div>}
+                  {plan.tier === 'deluxe' && <div className="pricing-popular-badge pricing-deluxe-badge">Premium</div>}
+
+                  <div className="pricing-card-header">
+                    {plan.badge === 'pro' && (
+                      <div className="pricing-badge-icon pricing-badge-pro">
+                        <span className="material-icons">verified</span>
+                      </div>
+                    )}
+                    {plan.badge === 'deluxe' && (
+                      <div className="pricing-badge-icon pricing-badge-deluxe">
+                        <span className="material-icons">workspace_premium</span>
+                      </div>
+                    )}
+                    <h3 className="pricing-card-name">{plan.name}</h3>
+                  </div>
+
+                  <div className="pricing-card-price">
+                    {plan.yearlyPrice && yearly ? (
+                      <>
+                        <span className="pricing-amount">{plan.yearlyPrice}</span>
+                        <span className="pricing-period">{plan.yearlyPeriod}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="pricing-amount">{plan.price}</span>
+                        {plan.period && <span className="pricing-period">{plan.period}</span>}
+                      </>
+                    )}
+                  </div>
+
+                  {plan.yearlySaving && yearly && (
+                    <div className="pricing-saving">{plan.yearlySaving}</div>
+                  )}
+
+                  <p className="pricing-card-desc">{plan.description}</p>
+
+                  <div className={`pricing-commission ${plan.tier === 'starter' ? 'pricing-commission-warn' : 'pricing-commission-ok'}`}>
+                    <span className="material-icons pricing-commission-icon">
+                      {plan.tier === 'starter' ? 'info' : 'check_circle'}
+                    </span>
+                    {plan.commission}
+                  </div>
+
+                  <ul className="pricing-features">
+                    {plan.features.map((feat) => (
+                      <li key={feat}>
+                        <span className="material-icons pricing-check">check</span>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    to="/contact"
+                    className={`pricing-cta ${
+                      plan.featured ? 'pricing-cta-primary' :
+                      plan.tier === 'deluxe' ? 'pricing-cta-deluxe' :
+                      'pricing-cta-outline'
+                    }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

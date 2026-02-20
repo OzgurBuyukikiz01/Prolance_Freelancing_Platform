@@ -1,3 +1,47 @@
+/* ===== Home entry animation (soldan sağa + opaklık) ===== */
+@keyframes home-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-entry .hero-badge {
+  animation: home-slide-in 0.55s ease-out backwards;
+}
+
+.home-entry .hero-title {
+  animation: home-slide-in 0.55s ease-out 0.08s backwards;
+}
+
+.home-entry .hero-description {
+  animation: home-slide-in 0.55s ease-out 0.16s backwards;
+}
+
+.home-entry .hero-actions {
+  animation: home-slide-in 0.55s ease-out 0.24s backwards;
+}
+
+.home-entry .hero-mockup-wrapper {
+  animation: home-slide-in 0.6s ease-out 0.12s backwards;
+}
+
+.home-entry .trust-section .trust-container {
+  animation: home-slide-in 0.55s ease-out 0.32s backwards;
+}
+
+.home-entry .brand-section .brand-header {
+  animation: home-slide-in 0.55s ease-out 0.4s backwards;
+}
+
+.home-entry .brand-section .brand-cards {
+  animation: home-slide-in 0.55s ease-out 0.48s backwards;
+}
+
 /* ===== Hero Section ===== */
 .hero {
   position: relative;
